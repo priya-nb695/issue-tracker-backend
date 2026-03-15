@@ -1,80 +1,70 @@
-# Developer Issue Tracker
+# Issue Tracker Backend API
 
-A full-stack issue tracking application for managing development tasks and bugs.
-Users can create, view, update, and delete issues to track project work efficiently.
+Backend API for the Issue Tracker application.
+This service provides REST APIs to create, manage, and track development issues.
 
 ## Tech Stack
 
-**Frontend**
-
-* React
-
-**Backend**
-
 * Node.js
 * Express.js
-
-**Database**
-
-* MongoDB (Mongoose)
+* MongoDB
+* Mongoose
 
 ## Features
 
-* Create new development issues
-* View all issues
-* Update issue status (Open / In Progress / Done)
+* Create new issues
+* Fetch all issues
+* Update issue details or status
 * Delete issues
-* RESTful API for issue management
+* RESTful API architecture
 
 ## Project Structure
 
 ```
-issue-tracker
+issue-tracker-backend
 │
-├── backend
-│   ├── models
-│   ├── routes
-│   ├── server.js
-│   └── package.json
+├── models
+│   └── Issue.js
 │
-└── frontend
-    ├── src
-    ├── components
-    └── App.js
+├── routes
+│   └── issues.js
+│
+├── server.js
+├── package.json
+└── .gitignore
 ```
 
 ## Installation
 
-### 1. Clone the repository
+### Clone repository
 
 ```
-git clone https://github.com/yourusername/issue-tracker.git
-cd issue-tracker
+git clone https://github.com/yourusername/issue-tracker-backend.git
+cd issue-tracker-backend
 ```
 
-### 2. Install backend dependencies
+### Install dependencies
 
 ```
-cd backend
 npm install
 ```
 
-### 3. Create environment file
+### Setup environment variables
 
-Create a `.env` file inside the backend folder:
+Create a `.env` file in the root directory.
 
 ```
-MONGO_URI=your_mongodb_connection_string
 PORT=5000
+MONGO_URI=your_mongodb_connection_string
 ```
 
-### 4. Run the backend server
+### Run the server
 
 ```
 npm run dev
 ```
 
-Server runs at:
+Server will start at:
 
 ```
 http://localhost:5000
@@ -82,20 +72,16 @@ http://localhost:5000
 
 ## API Endpoints
 
-| Method | Endpoint    | Description        |
-| ------ | ----------- | ------------------ |
-| GET    | /issues     | Get all issues     |
-| POST   | /issues     | Create a new issue |
-| PUT    | /issues/:id | Update issue       |
-| DELETE | /issues/:id | Delete issue       |
+| Method | Endpoint    | Description      |
+| ------ | ----------- | ---------------- |
+| GET    | /issues     | Get all issues   |
+| POST   | /issues     | Create new issue |
+| PUT    | /issues/:id | Update issue     |
+| DELETE | /issues/:id | Delete issue     |
 
 ## Future Improvements
 
-* User authentication
+* Authentication (JWT)
+* User roles
 * Assign issues to developers
-* Priority filtering
-* Dashboard analytics
-
-## Author
-
-Built as a learning project to practice full-stack development with React, Node.js, and MongoDB.
+* Pagination and filtering
