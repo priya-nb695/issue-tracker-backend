@@ -19,6 +19,10 @@ const issueSchema = new mongoose.Schema({
         default:"Medium"
     }
 },
+{
+    timestamps:true
+}
+  
+);
 
-
-)
+module.exports = mongoose.model("Issue",issueSchema);
