@@ -1,3 +1,5 @@
+//defining schema like structure
+
 const mongoose = require("mongoose");
 const issueSchema = new mongoose.Schema({
     title: {
