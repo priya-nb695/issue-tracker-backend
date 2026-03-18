@@ -52,4 +52,21 @@ router.put("/:id",async (req,res) => {
     
 })
 
+router.delete("/:id",async (req,res) => {
+    
+   try {
+        const deletedIssue = Issue.findByIdAndDelete(req.params.id);
+        
+        if(!deletedIssue){
+            return res.status(404).json({message:"Issue not found"});
+        }
+
+        res.json({ message : "Issue deleted successfully"});
+    } 
+    catch (error) {
+        res.status(500).json({message: error.message});
+    }
+    
+})
+
 module.exports = router;
