@@ -19,4 +19,17 @@ router.post("/", async (req, res) => {
 
 });
 
+router.get("/",async (req,res) => {
+    try{
+        const issues = await Issue.find();
+    
+         res.json(issues);
+    }
+    catch(error){
+        res.json({message:error.json});
+    }
+    
+    
+});
+
 module.exports = router;
