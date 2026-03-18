@@ -32,4 +32,24 @@ router.get("/",async (req,res) => {
     
 });
 
+router.put("/:id",async (req,res) => {
+    try{
+        const updatedIssue = await Issue.findByIdAndUpdate(
+           req.params.id,
+           req.body,
+           { new:true, runValidators: true}
+      );
+
+      if(!updatedIssue){
+        return res.status(404).json({message:"Issue not found"});
+      }
+
+      res.json(updatedIssue);
+    }
+    catch(error){
+        res.status(500).json({message:error.message});
+    }
+    
+})
+
 module.exports = router;
