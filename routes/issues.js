@@ -44,6 +44,10 @@ router.put("/:id", async (req, res) => {
             return res.status(404).json({ message: "Issue not found" });
         }
 
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: "Invalid ID format" });
+        }
+
         res.json(updatedIssue);
     }
     catch (error) {
@@ -60,7 +64,10 @@ router.delete("/:id", async (req, res) => {
         if (!deletedIssue) {
             return res.status(404).json({ message: "Issue not found" });
         }
-
+        
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: "Invalid ID format" });
+        }
         res.json({ message: "Issue deleted successfully" });
     }
     catch (error) {
