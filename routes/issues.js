@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const Issue = require("../models/Issue");
+const mongoose = require("mongoose");
 
 //Post/issues
 
@@ -34,6 +35,11 @@ router.get("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     try {
+        // ✅ Validate ID FIRST
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: "Invalid ID format" });
+        }
+
         const updatedIssue = await Issue.findByIdAndUpdate(
             req.params.id,
             req.body,
@@ -44,17 +50,13 @@ router.put("/:id", async (req, res) => {
             return res.status(404).json({ message: "Issue not found" });
         }
 
-        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-            return res.status(400).json({ message: "Invalid ID format" });
-        }
-
         res.json(updatedIssue);
-    }
-    catch (error) {
+
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
+});
 
-})
 
 router.delete("/:id", async (req, res) => {
 
