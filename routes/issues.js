@@ -59,23 +59,21 @@ router.put("/:id", async (req, res) => {
 
 
 router.delete("/:id", async (req, res) => {
-
-    try {
-        const deletedIssue = Issue.findByIdAndDelete(req.params.id);
-
-        if (!deletedIssue) {
-            return res.status(404).json({ message: "Issue not found" });
-        }
-        
-        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-            return res.status(400).json({ message: "Invalid ID format" });
-        }
-        res.json({ message: "Issue deleted successfully" });
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message });
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Invalid ID format" });
     }
 
-})
+    const deletedIssue = await Issue.findByIdAndDelete(req.params.id);
+
+    if (!deletedIssue) {
+      return res.status(404).json({ message: "Issue not found" });
+    }
+
+    res.json({ message: "Issue deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;
